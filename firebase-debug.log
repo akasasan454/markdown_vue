@@ -1,0 +1,34 @@
+[debug] [2018-12-20T14:26:11.849Z] ----------------------------------------------------------------------
+[debug] [2018-12-20T14:26:11.851Z] Command:       /Users/ogaitotakafumi/.nodebrew/node/v10.5.0/bin/node /Users/ogaitotakafumi/.nodebrew/current/bin/firebase deploy
+[debug] [2018-12-20T14:26:11.851Z] CLI Version:   6.1.2
+[debug] [2018-12-20T14:26:11.851Z] Platform:      darwin
+[debug] [2018-12-20T14:26:11.851Z] Node Version:  v10.5.0
+[debug] [2018-12-20T14:26:11.852Z] Time:          Thu Dec 20 2018 23:26:11 GMT+0900 (Japan Standard Time)
+[debug] [2018-12-20T14:26:11.852Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-12-20T14:26:11.861Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-12-20T14:26:11.861Z] > authorizing via signed-in user
+[debug] [2018-12-20T14:26:11.861Z] [iam] checking project markdown-vue-fb81b for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2018-12-20T14:26:11.863Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/markdown-vue-fb81b:testIamPermissions  
+
+[debug] [2018-12-20T14:26:12.675Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-20T14:26:12.677Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/markdown-vue-fb81b  
+ 
+[debug] [2018-12-20T14:26:13.490Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'markdown-vue-fb81b'...
+[info] 
+[info] i  deploying hosting
+[debug] [2018-12-20T14:26:13.494Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/markdown-vue-fb81b/versions  
+
+[debug] [2018-12-20T14:26:14.822Z] <<< HTTP RESPONSE 200
+[info] i  hosting[markdown-vue-fb81b]: beginning deploy...
+[info] i  hosting[markdown-vue-fb81b]: found 4 files in dist
+[debug] [2018-12-20T14:26:14.831Z] [hosting] hash cache [ZGlzdA] load error: lines is not defined
+[debug] [2018-12-20T14:26:14.845Z] [hosting] hash cache [ZGlzdA] stored for 4 files
+[debug] [2018-12-20T14:26:14.845Z] [hosting][hash queue][FINAL]
+[debug] [2018-12-20T14:26:14.846Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/markdown-vue-fb81b/versions/d0ab34a9efa36e28:populateFiles  
+ <request body omitted>
+[debug] [2018-12-20T14:26:16.012Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-20T14:26:16.014Z] [hosting][populate queue][FINAL]
+[debug] [2018-12-20T14:26:16.014Z] [hosting] uploads queued: 1
