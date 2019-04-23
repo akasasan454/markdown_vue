@@ -1,30 +1,39 @@
 <template>
   <div id="editor">
-    <h1>エディター画面</h1>
-    <span>{{ user.displayName }}</span>
-    <button @click="logout">ログアウト</button>
-    <div class="editorWrapper">
-      <div class="memoListWrapper">
-        <div
-          class="memoList"
-          v-for="(memo, index) in memos"
-          :key="index"
-          @click="selectMemo(index)"
-          :data-selected="index == selectedIndex"
-        >
-          <p class="memoTitle">{{ displayTitle(memo.markdown) }}</p>
+    <v-container>
+      <h1>エディター画面</h1>
+      <span>{{ user.displayName }}</span>
+      <v-btn class="red white--text text--darken-4" @click="logout">ログアウト</v-btn>
+      <div class="editorWrapper">
+        <div class="memoListWrapper">
+          <div
+            class="memoList"
+            v-for="(memo, index) in memos"
+            :key="index"
+            @click="selectMemo(index)"
+            :data-selected="index == selectedIndex"
+          >
+            <p class="memoTitle">{{ displayTitle(memo.markdown) }}</p>
+          </div>
+          <v-btn outline round class="green green--text text--darken-4" @click="addMemo">メモの追加</v-btn>
+          <v-btn
+            outline
+            round
+            class="red red--text text--darken-4"
+            v-if="memos.length > 1"
+            @click="deleteMemo"
+          >選択中のメモの削除</v-btn>
+          <v-btn outline round class="blue blue--text text--darken-4" @click="saveMemos">メモの保存</v-btn>
         </div>
-        <button class="addMemoBtn" @click="addMemo">メモの追加</button>
-        <button class="deleteMemoBtn" v-if="memos.length > 1" @click="deleteMemo">選択中のメモの削除</button>
-        <button class="saveMemosBtn" @click="saveMemos">メモの保存</button>
+        <v-textarea outline height="500" name="input-7-4" v-model="memos[selectedIndex].markdown"></v-textarea>
+        <div class="preview markdown-body pl-5" v-html="preview()"></div>
       </div>
-      <textarea class="markdown" v-model="memos[selectedIndex].markdown"></textarea>
-      <div class="preview markdown-body" v-html="preview()"></div>
-    </div>
+    </v-container>
   </div>
 </template>
 
 <script>
+marked.setOptions({ breaks: true });
 import marked from "marked";
 export default {
   name: "editor",
@@ -86,7 +95,6 @@ export default {
       this.selectedIndex = index;
     },
     preview: function() {
-      marked.setOptions({ breaks: true });
       return marked(this.memos[this.selectedIndex].markdown);
     },
     displayTitle: function(text) {
@@ -109,11 +117,11 @@ export default {
   box-sizing: border-box;
   text-align: left;
   border-bottom: 1px solid #000;
-  &:nth-child(even) {
-    background-color: #ccc;
-  }
+  // &:nth-child(even) {
+  //   background-color: #f6f6f6;
+  // }
   &[data-selected="true"] {
-    background-color: #ccf;
+    background-color: rgb(4, 113, 255);
   }
 }
 .memoTitle {
