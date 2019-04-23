@@ -25,7 +25,10 @@
           >選択中のメモの削除</v-btn>
           <v-btn outline round class="blue blue--text text--darken-4" @click="saveMemos">メモの保存</v-btn>
         </div>
-        <v-textarea outline height="500" name="input-7-4" v-model="memos[selectedIndex].markdown"></v-textarea>
+        <v-layout column justify-center>
+          <v-text-field box label="タイトル" v-model="memos[selectedIndex].title"></v-text-field>
+          <v-textarea box height="300" label="本文" v-model="memos[selectedIndex].markdown"></v-textarea>
+        </v-layout>
         <div class="preview markdown-body pl-5" v-html="preview()"></div>
       </div>
     </v-container>
@@ -42,6 +45,7 @@ export default {
     return {
       memos: [
         {
+          title: "",
           markdown: ""
         }
       ],

@@ -30,9 +30,6 @@ export default {
       userData: null
     };
   },
-  logout: function() {
-    firebase.auth().signOut();
-  },
   created: function() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -43,6 +40,11 @@ export default {
         this.userData = null;
       }
     });
+  },
+  methods: {
+    logout: function() {
+      firebase.auth().signOut();
+    }
   },
   components: {
     Home: Home,
