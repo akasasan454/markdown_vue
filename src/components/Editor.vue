@@ -1,36 +1,46 @@
 <template>
   <div id="editor">
-    <v-container>
-      <h1>エディター画面</h1>
-      <span>{{ user.displayName }}</span>
-      <v-btn class="red white--text text--darken-4" @click="logout">ログアウト</v-btn>
-      <div class="editorWrapper">
-        <div class="memoListWrapper">
-          <div
-            class="memoList"
-            v-for="(memo, index) in memos"
-            :key="index"
-            @click="selectMemo(index)"
-            :data-selected="index == selectedIndex"
-          >
-            <p class="memoTitle">{{ displayTitle(memo.markdown) }}</p>
-          </div>
-          <v-btn outline round class="green green--text text--darken-4" @click="addMemo">メモの追加</v-btn>
-          <v-btn
-            outline
-            round
-            class="red red--text text--darken-4"
-            v-if="memos.length > 1"
-            @click="deleteMemo"
-          >選択中のメモの削除</v-btn>
-          <v-btn outline round class="blue blue--text text--darken-4" @click="saveMemos">メモの保存</v-btn>
-        </div>
+    <v-container class="ma-0 pa-0">
+      <v-btn outline icon class="green green--text text--darken-4" @click="addMemo">
+        <v-icon>add</v-icon>
+      </v-btn>
+      <v-btn outline icon class="blue blue--text text--darken-4" @click="saveMemos">
+        <v-icon>save</v-icon>
+      </v-btn>
+      <v-btn
+        outline
+        icon
+        class="red red--text text--darken-4"
+        v-if="memos.length > 1"
+        @click="deleteMemo"
+      >
+        <v-icon>delete</v-icon>
+      </v-btn>
+      <v-layout row justify-center>
+        <v-card class="mr-2" width="150" height="484">
+          <v-list subheader class="scroll">
+            <template v-for="(memo, index) in memos">
+              <v-list-tile
+                :key="index"
+                @click="selectMemo(index)"
+                v-bind:class="{ 'blue': index==selectedIndex }"
+              >
+                <v-list-tile-content>
+                  <v-list-tile-sub-title>{{ memo.title }}</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-divider v-if="index + 1 < memos.length" :key="index"></v-divider>
+            </template>
+          </v-list>
+        </v-card>
         <v-layout column justify-center>
           <v-text-field box label="タイトル" v-model="memos[selectedIndex].title"></v-text-field>
-          <v-textarea box height="300" label="本文" v-model="memos[selectedIndex].markdown"></v-textarea>
+          <v-layout row justify-center>
+            <v-textarea box height="400" label="本文" v-model="memos[selectedIndex].markdown"></v-textarea>
+            <div class="preview markdown-body ml-5 mt-4" v-html="preview()"></div>
+          </v-layout>
         </v-layout>
-        <div class="preview markdown-body pl-5" v-html="preview()"></div>
-      </div>
+      </v-layout>
     </v-container>
   </div>
 </template>
@@ -49,7 +59,16 @@ export default {
           markdown: ""
         }
       ],
-      selectedIndex: 0
+      selectedIndex: 0,
+      isMyMessage: true,
+      item: 3,
+      items: [
+        { text: "Real-Time", icon: "mdi-clock" },
+        { text: "Audience", icon: "mdi-account" },
+        { text: "Acquisition", icon: "mdi-axis-z-arrow" },
+        { text: "Behavior", icon: "mdi-desktop-classic" },
+        { text: "Conversions", icon: "mdi-flag" }
+      ]
     };
   },
   created: function() {
@@ -80,14 +99,17 @@ export default {
     },
     addMemo: function() {
       this.memos.push({
-        markdown: "無題のメモ"
+        markdown: "",
+        title: "新規メモ"
       });
+      this.saveMemos();
     },
     deleteMemo: function() {
       this.memos.splice(this.selectedIndex, 1);
       if (this.selectedIndex > 0) {
         this.selectedIndex--;
       }
+      this.saveMemos();
     },
     saveMemos: function() {
       firebase
@@ -115,18 +137,6 @@ export default {
 .memoListWrapper {
   width: 20%;
   border-top: 1px solid #000;
-}
-.memoList {
-  padding: 10px;
-  box-sizing: border-box;
-  text-align: left;
-  border-bottom: 1px solid #000;
-  // &:nth-child(even) {
-  //   background-color: #f6f6f6;
-  // }
-  &[data-selected="true"] {
-    background-color: rgb(4, 113, 255);
-  }
 }
 .memoTitle {
   height: 1.5em;

@@ -16,7 +16,7 @@ export default {
   name: "home",
   data() {
     return {
-      msg: "Welcome to Wiki"
+      msg: "Welcome"
     };
   },
   methods: {

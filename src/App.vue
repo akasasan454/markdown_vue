@@ -2,10 +2,19 @@
   <div id="app">
     <v-toolbar app>
       <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title>Wiki</v-toolbar-title>
+      <v-toolbar-title>Memo</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat @click="logout">ログアウト</v-btn>
+        <v-btn
+          flat
+          to="/"
+          active-class
+          class="font-weight-bold"
+          v-if="isLogin"
+        >{{ userData.displayName }}</v-btn>
+        <v-btn icon class="cyan white--text" @click="logout">
+          <v-icon>logout</v-icon>
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
