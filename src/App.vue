@@ -19,8 +19,13 @@
     </v-toolbar>
     <v-content>
       <v-container>
-        <Home v-if="!isLogin"></Home>
-        <Editor v-if="isLogin" :user="userData"></Editor>
+        <v-layout justify-center>
+          <div class="mt-5" v-if="!isLoginChecked">
+            <img width="100" height="100" alt="MyMarkdown" src="./assets/loading.gif">
+          </div>
+        </v-layout>
+        <Home v-if="!isLogin && isLoginChecked"></Home>
+        <Editor v-if="isLogin && isLoginChecked" :user="userData"></Editor>
       </v-container>
     </v-content>
     <v-footer app></v-footer>
@@ -36,11 +41,13 @@ export default {
   data() {
     return {
       isLogin: false,
-      userData: null
+      userData: null,
+      isLoginChecked: false
     };
   },
   created: function() {
     firebase.auth().onAuthStateChanged(user => {
+      this.isLoginChecked = true;
       if (user) {
         this.isLogin = true;
         this.userData = user;

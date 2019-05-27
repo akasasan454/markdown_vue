@@ -59,16 +59,7 @@ export default {
           markdown: ""
         }
       ],
-      selectedIndex: 0,
-      isMyMessage: true,
-      item: 3,
-      items: [
-        { text: "Real-Time", icon: "mdi-clock" },
-        { text: "Audience", icon: "mdi-account" },
-        { text: "Acquisition", icon: "mdi-axis-z-arrow" },
-        { text: "Behavior", icon: "mdi-desktop-classic" },
-        { text: "Conversions", icon: "mdi-flag" }
-      ]
+      selectedIndex: 0
     };
   },
   created: function() {
