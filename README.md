@@ -1,5 +1,8 @@
 # markdown_vue
 
+Vue.jsで実装したマークダウンエディタ
+
+Googleアカウントで誰でもログインして使用できます。
 > https://markdown-vue-fb81b.firebaseapp.com
 
 ## Build Setup
