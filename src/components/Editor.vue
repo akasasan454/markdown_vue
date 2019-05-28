@@ -4,8 +4,23 @@
       <v-btn outline icon class="green green--text text--darken-4" @click="addMemo">
         <v-icon>add</v-icon>
       </v-btn>
-      <v-btn outline icon class="blue blue--text text--darken-4" @click="saveMemos">
+      <v-btn
+        outline
+        icon
+        class="blue blue--text text--darken-4"
+        v-if="isEditing"
+        @click="saveMemos"
+      >
         <v-icon>save</v-icon>
+      </v-btn>
+      <v-btn
+        outline
+        icon
+        class="blue blue--text text--darken-4"
+        v-if="!isEditing"
+        @click="editMemo"
+      >
+        <v-icon>edit</v-icon>
       </v-btn>
       <v-btn
         outline
@@ -33,12 +48,15 @@
             </template>
           </v-list>
         </v-card>
-        <v-layout column justify-center>
+        <v-layout column justify-center v-if="isEditing">
           <v-text-field box label="タイトル" v-model="memos[selectedIndex].title"></v-text-field>
           <v-layout row justify-center>
             <v-textarea box height="400" label="本文" v-model="memos[selectedIndex].markdown"></v-textarea>
             <div class="preview markdown-body ml-5 mt-4" v-html="preview()"></div>
           </v-layout>
+        </v-layout>
+        <v-layout v-if="!isEditing">
+          <div class="view markdown-body ml-5" v-html="preview()"></div>
         </v-layout>
       </v-layout>
     </v-container>
@@ -59,7 +77,8 @@ export default {
           markdown: ""
         }
       ],
-      selectedIndex: 0
+      selectedIndex: 0,
+      isEditing: false
     };
   },
   created: function() {
@@ -107,9 +126,13 @@ export default {
         .database()
         .ref("memos/" + this.user.uid)
         .set(this.memos);
+      this.isEditing = false;
     },
     selectMemo: function(index) {
       this.selectedIndex = index;
+    },
+    editMemo: function(index) {
+      this.isEditing = true;
     },
     preview: function() {
       return marked(this.memos[this.selectedIndex].markdown);
@@ -147,6 +170,10 @@ export default {
 }
 .preview {
   width: 40%;
+  text-align: left;
+}
+.view {
+  width: 80%;
   text-align: left;
 }
 </style>
