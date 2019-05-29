@@ -12,7 +12,7 @@
           class="font-weight-bold"
           v-if="isLogin"
         >{{ userData.displayName }}</v-btn>
-        <v-btn icon class="cyan white--text" @click="logout">
+        <v-btn icon class="cyan white--text" v-if="isLogin" @click="logout">
           <v-icon>logout</v-icon>
         </v-btn>
       </v-toolbar-items>
