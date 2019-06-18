@@ -51,12 +51,21 @@
         <v-layout column justify-center v-if="isEditing">
           <v-text-field box label="タイトル" v-model="memos[selectedIndex].title"></v-text-field>
           <v-layout row justify-center>
-            <v-textarea box height="400" label="本文" v-model="memos[selectedIndex].markdown"></v-textarea>
-            <div class="preview markdown-body ml-5 mt-4" v-html="preview()"></div>
+            <v-textarea
+              box
+              no-resize
+              height="400"
+              label="本文"
+              v-model="memos[selectedIndex].markdown"
+            ></v-textarea>
+            <div class="preview markdown ml-5 mt-4">
+              <div v-html="preview()"></div>
+            </div>
           </v-layout>
         </v-layout>
-        <v-layout v-if="!isEditing">
-          <div class="view markdown-body ml-5" v-html="preview()"></div>
+        <v-layout column v-if="!isEditing">
+          <h1 class="view ml-5">{{memos[selectedIndex].title}}</h1>
+          <div class="view markdown ml-5 mt-3 gray" v-html="preview()"></div>
         </v-layout>
       </v-layout>
     </v-container>
@@ -165,15 +174,18 @@ export default {
   margin: 10px;
 }
 .markdown {
-  width: 40%;
-  height: 500px;
+  width: 45%;
+  height: 400px;
 }
 .preview {
-  width: 40%;
+  width: 45%;
   text-align: left;
 }
 .view {
   width: 80%;
   text-align: left;
+}
+.gray {
+  color: rgb(80, 79, 79);
 }
 </style>
