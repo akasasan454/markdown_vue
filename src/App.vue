@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-cloak>
     <v-toolbar app>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>Memo</v-toolbar-title>
@@ -68,3 +68,9 @@ export default {
   }
 };
 </script>
+
+<style>
+[v-cloak] {
+  display: none;
+}
+</style>
