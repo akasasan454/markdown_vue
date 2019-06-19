@@ -5,7 +5,7 @@
         <h1 class="mt-3">{{ msg }}</h1>
       </v-layout>
       <v-layout justify-center>
-        <v-btn class="mt-4" @click="googleLogin">Googleアカウントでログイン</v-btn>
+        <v-btn class="mt-4 text-transform-none" @click="googleLogin">Googleアカウントでログイン</v-btn>
       </v-layout>
     </v-container>
   </div>
@@ -28,3 +28,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.text-transform-none {
+  text-transform: none;
+}
+</style>
